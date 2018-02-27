@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/********************************************************
+* Jason Thatcher                                        *
+* Class - Form1.cs                                      *
+*                                                       *
+* Class derives from Form. Entry point into application *
+* called from Main() Single form app                    *
+*                                                       *
+* February 2018                                         *
+*********************************************************/
+
+using System;
 using System.Windows.Forms;
 
 namespace BankingException

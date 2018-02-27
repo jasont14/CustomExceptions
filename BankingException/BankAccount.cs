@@ -1,8 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/********************************************************
+* Jason Thatcher                                        *
+* Class - BankAccount.cs                            *
+*                                                       *
+* Class to represent a Bank Account.  Very basic to     *
+* work with custom execptions.                          *
+*                                                       *
+* February 2018                                         *
+*********************************************************/
+
+using System;
 
 namespace BankingException
 {
