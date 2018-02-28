@@ -14,14 +14,15 @@ namespace BankingException
 {
     class BankAccount
     {
-        private decimal balance;    //Maintains account balance
+        private decimal balance;    
         public enum ActivityType {Deposit, Withdraw};
-        ActivityType activity = ActivityType.Deposit;   //Sets default activity to deposit.
+        ActivityType activity = ActivityType.Deposit;   
          
         //constructor for new account
         public BankAccount()
-        {            
-            Balance = 0.00m;     //set balance to 0.00 since this is an original account 
+        {
+            //set balance to 0.00 since this is an original account 
+            Balance = 0.00m;     
         }
 
         //constructor for existing account
@@ -29,34 +30,52 @@ namespace BankingException
         {
             Balance = balance; 
         }
-                
-        //Property Balance to provide read/write to balance
+        
         public decimal Balance { get => balance; set => balance = value; }
-        //Property Activity to provide read/wrte to activity.
         public ActivityType Activity { get => activity; set => activity = value; }
 
         //withdraws amount from account
-        public void Withdraw(decimal amount)
+        public decimal Withdraw(decimal amount)
         {
-            Balance = Balance - amount;
+            decimal result = Balance - amount;
+
+            if (result.CompareTo(0.00m) == -1)
+            {
+                NegativeBalanceException negativeBalanceException = new NegativeBalanceException("Withdraw exceeds account balance.  Transaction cancelled.");
+                throw negativeBalanceException;
+            }
+
+            return result;
         }
 
         //deposits amount to account
-        public void Deposit(decimal amount)
+        public decimal Deposit(decimal amount)
         {
-            Balance = Balance + amount;
+            if (amount.CompareTo(0.00m) == -1)
+            {
+                NegativeDepositException negativeDepositException = new NegativeDepositException("Deposit cannot be negative. Transaction cancelled.");
+                throw negativeDepositException;
+            }
+
+            decimal result = Balance + amount;
+            return result;
         }
 
         //records a debit or credit to account based upon Activity.
         public decimal RecordCreditDebit(decimal amount)
         {
+            if (amount.CompareTo(1000.00m) == 1)
+            {
+                TooLargeException tooLargeException = new TooLargeException("Amount cannot exceed $1,000.00 per transaction.  Transaction cancelled.");
+                throw tooLargeException;
+            }
             switch (activity)
             {
                 case ActivityType.Deposit:
-                    Deposit(amount);
+                    Balance = Deposit(amount);
                     break;
                 case ActivityType.Withdraw:
-                    Withdraw(amount);
+                    Balance = Withdraw(amount);
                     break;
             }
             return Balance;

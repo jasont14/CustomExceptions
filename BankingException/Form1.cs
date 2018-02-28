@@ -26,7 +26,9 @@ namespace BankingException
         private void InitializeBankAccount()
         {
             myAccount = new BankAccount();
-            myAccount.Activity = BankAccount.ActivityType.Deposit; //set default activity type to deposit.
+
+            //set default activity type to deposit.
+            myAccount.Activity = BankAccount.ActivityType.Deposit; 
         }
 
         //Evaluates ActivityType sets appropirate checked value;
@@ -62,21 +64,35 @@ namespace BankingException
         //responds to button click event
         private void btnDeposit_Click(object sender, EventArgs e)  
         {
-            //validate entry can be parsed to decimal and value not neg or zero
-
-            if (!decimal.TryParse(txtDeposit.Text, out decimal value) || value <= 0) 
+            decimal value;
+            try
             {
-                MessageBox.Show("Please enter valid " + myAccount.Activity.ToString() + " amount.", myAccount.Activity.ToString());
+                txtErrorMessage.Text = "";
+                if(!decimal.TryParse(txtDeposit.Text, out value) || value != decimal.Round(value,2))
+                {
+                    MessageBox.Show("Please enter valid " + myAccount.Activity.ToString() + " amount.", myAccount.Activity.ToString());
+                }
+                else
+                {
+                    txtAccountBalance.Text = myAccount.RecordCreditDebit(value).ToString();
+                    txtDeposit.Text = "0.00"; //Set text box back to 0.00 to avoid duplicate deposit / withdraws.
+                }
             }
-            else
+            catch (NegativeDepositException ex)
             {
-            //withdrawORdeposit and return Balance.
-            txtAccountBalance.Text = myAccount.RecordCreditDebit(value).ToString(); 
-            txtDeposit.Text = "0.00"; //Set text box back to 0.00 to avoid duplicate deposit / withdraws.
+                txtErrorMessage.Text = ex.Message;
             }
+            catch (NegativeBalanceException ex)
+            {
+                txtErrorMessage.Text = ex.Message;  
+            }
+            catch (TooLargeException ex)
+            {
+                txtErrorMessage.Text = ex.Message;
+            }
+           
         }
-
-        //Reponsds to enter event and clears text box
+        
         private void txtDeposit_Enter(object sender, EventArgs e) 
         {
             txtDeposit.Text = "";
@@ -84,7 +100,7 @@ namespace BankingException
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            SetAccountActivityType();  //once loaded set initial activity type.  
+            SetAccountActivityType();  
         }
     }
 }

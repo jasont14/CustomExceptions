@@ -34,8 +34,9 @@
             this.lblDepositAmount = new System.Windows.Forms.Label();
             this.btnDeposit = new System.Windows.Forms.Button();
             this.grpAccountActivity = new System.Windows.Forms.GroupBox();
-            this.rdoDeposit = new System.Windows.Forms.RadioButton();
             this.rdoWithdraw = new System.Windows.Forms.RadioButton();
+            this.rdoDeposit = new System.Windows.Forms.RadioButton();
+            this.txtErrorMessage = new System.Windows.Forms.TextBox();
             this.grpAccountActivity.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,9 +45,10 @@
             this.txtAccountBalance.BackColor = System.Drawing.SystemColors.Control;
             this.txtAccountBalance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtAccountBalance.Enabled = false;
-            this.txtAccountBalance.Location = new System.Drawing.Point(235, 7);
+            this.txtAccountBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAccountBalance.Location = new System.Drawing.Point(218, 7);
             this.txtAccountBalance.Name = "txtAccountBalance";
-            this.txtAccountBalance.Size = new System.Drawing.Size(78, 20);
+            this.txtAccountBalance.Size = new System.Drawing.Size(95, 26);
             this.txtAccountBalance.TabIndex = 0;
             this.txtAccountBalance.Text = "0.00";
             this.txtAccountBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -66,7 +68,7 @@
             // 
             this.lblBalance.AutoSize = true;
             this.lblBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBalance.Location = new System.Drawing.Point(170, 9);
+            this.lblBalance.Location = new System.Drawing.Point(153, 12);
             this.lblBalance.Name = "lblBalance";
             this.lblBalance.Size = new System.Drawing.Size(59, 17);
             this.lblBalance.TabIndex = 3;
@@ -105,19 +107,6 @@
             this.grpAccountActivity.TabStop = false;
             this.grpAccountActivity.Text = "AccountActivity";
             // 
-            // rdoDeposit
-            // 
-            this.rdoDeposit.AutoSize = true;
-            this.rdoDeposit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdoDeposit.Location = new System.Drawing.Point(28, 29);
-            this.rdoDeposit.Name = "rdoDeposit";
-            this.rdoDeposit.Size = new System.Drawing.Size(74, 21);
-            this.rdoDeposit.TabIndex = 0;
-            this.rdoDeposit.TabStop = true;
-            this.rdoDeposit.Text = "Deposit";
-            this.rdoDeposit.UseVisualStyleBackColor = true;
-            this.rdoDeposit.CheckedChanged += new System.EventHandler(this.rdoDeposit_CheckedChanged);
-            // 
             // rdoWithdraw
             // 
             this.rdoWithdraw.AutoSize = true;
@@ -131,11 +120,35 @@
             this.rdoWithdraw.UseVisualStyleBackColor = true;
             this.rdoWithdraw.CheckedChanged += new System.EventHandler(this.rdoWithdraw_CheckedChanged);
             // 
+            // rdoDeposit
+            // 
+            this.rdoDeposit.AutoSize = true;
+            this.rdoDeposit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdoDeposit.Location = new System.Drawing.Point(28, 29);
+            this.rdoDeposit.Name = "rdoDeposit";
+            this.rdoDeposit.Size = new System.Drawing.Size(74, 21);
+            this.rdoDeposit.TabIndex = 0;
+            this.rdoDeposit.TabStop = true;
+            this.rdoDeposit.Text = "Deposit";
+            this.rdoDeposit.UseVisualStyleBackColor = true;
+            this.rdoDeposit.CheckedChanged += new System.EventHandler(this.rdoDeposit_CheckedChanged);
+            // 
+            // txtErrorMessage
+            // 
+            this.txtErrorMessage.BackColor = System.Drawing.SystemColors.Control;
+            this.txtErrorMessage.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtErrorMessage.Location = new System.Drawing.Point(47, 185);
+            this.txtErrorMessage.Multiline = true;
+            this.txtErrorMessage.Name = "txtErrorMessage";
+            this.txtErrorMessage.Size = new System.Drawing.Size(266, 41);
+            this.txtErrorMessage.TabIndex = 11;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(332, 202);
+            this.ClientSize = new System.Drawing.Size(332, 238);
+            this.Controls.Add(this.txtErrorMessage);
             this.Controls.Add(this.grpAccountActivity);
             this.Controls.Add(this.btnDeposit);
             this.Controls.Add(this.lblBalance);
@@ -163,6 +176,7 @@
         private System.Windows.Forms.GroupBox grpAccountActivity;
         private System.Windows.Forms.RadioButton rdoWithdraw;
         private System.Windows.Forms.RadioButton rdoDeposit;
+        private System.Windows.Forms.TextBox txtErrorMessage;
     }
 }
 
