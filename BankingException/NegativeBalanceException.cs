@@ -1,4 +1,14 @@
-﻿using System;
+﻿/********************************************************
+* Jason Thatcher                                        *
+* Exception Class - NegativeBalanceException.cs         *
+*                                                       *
+* Exception Class to handle negative balance application*
+* error.  Account cannot be less than zero.             *
+*                                                       *
+* February 2018                                         *
+*********************************************************/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

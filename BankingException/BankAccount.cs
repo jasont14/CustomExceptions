@@ -30,19 +30,39 @@ namespace BankingException
         {
             Balance = balance; 
         }
-        
-        public decimal Balance { get => balance; set => balance = value; }
+
         public ActivityType Activity { get => activity; set => activity = value; }
+        
+        public decimal Balance
+        {
+            get
+            {
+                return balance;
+            }
+            set
+            {
+                //Property is public. Throws exception with general message if value is less than 0.00 because it could be from withdraw, negative deposit, etc. 
+                if(value.CompareTo(0.00m) == -1)
+                {
+                    throw new NegativeBalanceException("Error setting balance. The balance cannot be less than $0.00.");
+                }
+                else
+                {
+                    balance = value;
+                }
+                
+            }
+        }
 
         //withdraws amount from account
         public decimal Withdraw(decimal amount)
         {
             decimal result = Balance - amount;
 
+            //Throws exception if value to set is less than $0.00.
             if (result.CompareTo(0.00m) == -1)
             {
-                NegativeBalanceException negativeBalanceException = new NegativeBalanceException("Withdraw exceeds account balance.  Transaction cancelled.");
-                throw negativeBalanceException;
+                throw new NegativeBalanceException("Withdraw exceeds account balance.  Transaction cancelled.");                
             }
 
             return result;
@@ -53,8 +73,7 @@ namespace BankingException
         {
             if (amount.CompareTo(0.00m) == -1)
             {
-                NegativeDepositException negativeDepositException = new NegativeDepositException("Deposit cannot be negative. Transaction cancelled.");
-                throw negativeDepositException;
+                throw new NegativeDepositException("Deposit cannot be negative. Transaction cancelled.");
             }
 
             decimal result = Balance + amount;
@@ -66,8 +85,7 @@ namespace BankingException
         {
             if (amount.CompareTo(1000.00m) == 1)
             {
-                TooLargeException tooLargeException = new TooLargeException("Amount cannot exceed $1,000.00 per transaction.  Transaction cancelled.");
-                throw tooLargeException;
+                throw new TooLargeException("Amount cannot exceed $1,000.00 per transaction.  Transaction cancelled.");
             }
             switch (activity)
             {

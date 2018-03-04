@@ -80,7 +80,7 @@ namespace BankingException
             }
             catch (NegativeDepositException ex)
             {
-                txtErrorMessage.Text = ex.Message;
+                txtErrorMessage.Text = ex.Message;               
             }
             catch (NegativeBalanceException ex)
             {

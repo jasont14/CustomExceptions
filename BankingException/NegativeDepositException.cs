@@ -1,8 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/********************************************************
+* Jason Thatcher                                        *
+* Exception Class - NegativeDepositException.cs         *
+*                                                       *
+* Exception Class to handle negative deposit application*
+* error.  Deposit cannot be less than zero.             *
+*                                                       *
+* February 2018                                         *
+*********************************************************/
+
+using System;
 
 namespace BankingException
 {
